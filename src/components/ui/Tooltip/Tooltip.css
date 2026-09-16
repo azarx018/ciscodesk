@@ -1,0 +1,17 @@
+.cd-tooltip-wrap { position: relative; display: inline-flex; }
+.cd-tooltip {
+  position: absolute;
+  z-index: 50;
+  background: var(--text-primary);
+  color: var(--surface);
+  font-size: var(--text-xs);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+}
+.cd-tooltip-top { bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
+.cd-tooltip-bottom { top: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
+.cd-tooltip-left { right: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
+.cd-tooltip-right { left: calc(100% + 6px); top: 50%; transform: translateY(-50%); }

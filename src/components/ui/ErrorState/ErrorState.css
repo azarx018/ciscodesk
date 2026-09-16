@@ -1,0 +1,11 @@
+.cd-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 24px 4px;
+  max-width: 440px;
+}
+.cd-error-title { font-size: var(--text-base); font-weight: 600; color: var(--status-error); }
+.cd-error-message { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; }
+.cd-error-retry { margin-top: 4px; }

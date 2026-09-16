@@ -1,0 +1,22 @@
+.cd-status { display: inline-flex; align-items: center; gap: 7px; }
+.cd-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-block;
+}
+.cd-status-online { background: var(--status-online); box-shadow: 0 0 0 2px var(--status-online-wash); }
+.cd-status-warning { background: var(--status-warning); box-shadow: 0 0 0 2px var(--status-warning-wash); }
+.cd-status-error { background: var(--status-error); box-shadow: 0 0 0 2px var(--status-error-wash); }
+.cd-status-offline { background: var(--status-offline); box-shadow: 0 0 0 2px var(--status-offline-wash); }
+.cd-status-label { font-size: var(--text-sm); color: var(--text-primary); }
+
+.cd-status-pulse { animation: cd-status-pulse 2s ease-in-out infinite; }
+@keyframes cd-status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cd-status-pulse { animation: none; }
+}

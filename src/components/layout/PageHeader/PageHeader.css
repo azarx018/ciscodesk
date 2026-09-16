@@ -1,0 +1,11 @@
+.cd-page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.cd-page-title { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.1px; }
+.cd-page-subtitle { font-size: var(--text-xs); color: var(--text-muted); margin-top: 2px; }
+.cd-page-actions { display: flex; align-items: center; gap: var(--space-2); }

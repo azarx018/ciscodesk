@@ -1,0 +1,12 @@
+.cd-user-trigger {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+.cd-user-trigger:hover { background: var(--surface-hover); }

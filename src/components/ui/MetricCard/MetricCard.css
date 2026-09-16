@@ -1,0 +1,32 @@
+.cd-metric { display: flex; flex-direction: column; gap: 6px; }
+.cd-metric-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.cd-metric-value {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+.cd-metric-warning { color: var(--status-warning); }
+.cd-metric-error { color: var(--status-error); }
+.cd-metric-online { color: var(--status-online); }
+.cd-metric-unit {
+  font-size: var(--text-md);
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-left: 2px;
+}
+.cd-meter {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-inset);
+  overflow: hidden;
+}
+.cd-meter > span { display: block; height: 100%; border-radius: 2px; }
+.cd-metric-footnote {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}

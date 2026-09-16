@@ -1,0 +1,14 @@
+.cd-breadcrumbs {
+  height: var(--breadcrumb-h);
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 20px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.cd-breadcrumb-item { display: inline-flex; align-items: center; gap: 6px; }
+.cd-breadcrumb-sep { color: var(--border-strong); }
+.cd-breadcrumb-current { color: var(--text-primary); font-weight: 500; }

@@ -1,0 +1,5 @@
+.cd-confirm-message {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

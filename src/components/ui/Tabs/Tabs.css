@@ -1,0 +1,21 @@
+.cd-tabs { display: flex; flex-direction: column; min-height: 0; }
+.cd-tabs-list {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+.cd-tab {
+  border: none;
+  background: none;
+  padding: 9px 12px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.cd-tab:hover { color: var(--text-primary); }
+.cd-tab-active { color: var(--accent-strong); border-bottom-color: var(--accent); }
+.cd-tab:disabled { opacity: 0.4; pointer-events: none; }
+.cd-tabs-panel { flex: 1; min-height: 0; padding-top: var(--space-3); }

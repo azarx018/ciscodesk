@@ -1,0 +1,147 @@
+/* ============================================================
+   CISCODESK — DESIGN TOKENS
+   Technical / dense / calm network-ops aesthetic.
+   Two intentional themes: light (paper/instrument panel) and
+   dark (rack-room, low-glare). Colors are restrained and used
+   almost entirely for state, not decoration.
+   ============================================================ */
+
+:root {
+  /* --- surfaces --- */
+  --surface: #f4f5f6;
+  --surface-raised: #ffffff;
+  --surface-inset: #eaedef;
+  --surface-hover: #e7e9eb;
+  --surface-overlay: rgba(10, 12, 14, 0.55);
+
+  /* --- borders --- */
+  --border: #dbdfe2;
+  --border-strong: #c2c8cd;
+
+  /* --- text --- */
+  --text-primary: #14171a;
+  --text-secondary: #565e67;
+  --text-muted: #7b838c;
+  --text-on-accent: #ffffff;
+
+  /* --- accent (selection / links / primary actions) --- */
+  --accent: #3d6c96;
+  --accent-strong: #2e5578;
+  --accent-wash: rgba(61, 108, 150, 0.1);
+
+  /* --- status --- */
+  --status-online: #1f8b4c;
+  --status-online-wash: rgba(31, 139, 76, 0.12);
+  --status-warning: #a9760c;
+  --status-warning-wash: rgba(169, 118, 12, 0.12);
+  --status-error: #c23b3b;
+  --status-error-wash: rgba(194, 59, 59, 0.12);
+  --status-offline: #7b838c;
+  --status-offline-wash: rgba(123, 131, 140, 0.12);
+
+  /* --- radius --- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+
+  /* --- spacing scale (4px base) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* --- typography --- */
+  --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12.5px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+
+  /* --- shadows (used sparingly: overlays only, not cards) --- */
+  --shadow-sm: 0 1px 2px rgba(20, 23, 26, 0.06);
+  --shadow-md: 0 2px 10px rgba(20, 23, 26, 0.1);
+
+  /* --- motion --- */
+  --transition-fast: 100ms ease;
+  --transition-base: 150ms ease;
+
+  /* --- layout constants --- */
+  --sidebar-w: 236px;
+  --sidebar-w-collapsed: 56px;
+  --topbar-h: 52px;
+  --breadcrumb-h: 34px;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --surface: #14171a;
+  --surface-raised: #1b1f23;
+  --surface-inset: #101316;
+  --surface-hover: #23282d;
+  --surface-overlay: rgba(0, 0, 0, 0.6);
+
+  --border: #262b30;
+  --border-strong: #363c42;
+
+  --text-primary: #e7eaed;
+  --text-secondary: #9ba3ac;
+  --text-muted: #6b7480;
+  --text-on-accent: #0e1114;
+
+  --accent: #6ea0cc;
+  --accent-strong: #85b2da;
+  --accent-wash: rgba(110, 160, 204, 0.14);
+
+  --status-online: #4fbd79;
+  --status-online-wash: rgba(79, 189, 121, 0.14);
+  --status-warning: #d9a441;
+  --status-warning-wash: rgba(217, 164, 65, 0.14);
+  --status-error: #e5686a;
+  --status-error-wash: rgba(229, 104, 106, 0.14);
+  --status-offline: #838b94;
+  --status-offline-wash: rgba(131, 139, 148, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+/* Respect system preference only when the user hasn't chosen explicitly */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --surface: #14171a;
+    --surface-raised: #1b1f23;
+    --surface-inset: #101316;
+    --surface-hover: #23282d;
+    --surface-overlay: rgba(0, 0, 0, 0.6);
+    --border: #262b30;
+    --border-strong: #363c42;
+    --text-primary: #e7eaed;
+    --text-secondary: #9ba3ac;
+    --text-muted: #6b7480;
+    --text-on-accent: #0e1114;
+    --accent: #6ea0cc;
+    --accent-strong: #85b2da;
+    --accent-wash: rgba(110, 160, 204, 0.14);
+    --status-online: #4fbd79;
+    --status-online-wash: rgba(79, 189, 121, 0.14);
+    --status-warning: #d9a441;
+    --status-warning-wash: rgba(217, 164, 65, 0.14);
+    --status-error: #e5686a;
+    --status-error-wash: rgba(229, 104, 106, 0.14);
+    --status-offline: #838b94;
+    --status-offline-wash: rgba(131, 139, 148, 0.14);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
