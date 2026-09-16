@@ -22,6 +22,10 @@ export function DeviceSelector() {
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
+  if (!selectedDevice) {
+    return <div className="cd-device-selector cd-device-selector-loading">Loading devices…</div>;
+  }
+
   return (
     <div className="cd-device-selector" ref={ref}>
       <button className="cd-device-trigger" onClick={() => setOpen((o) => !o)} aria-haspopup="listbox" aria-expanded={open}>

@@ -1,4 +1,13 @@
 .cd-device-selector { position: relative; }
+.cd-device-selector-loading {
+  display: flex;
+  align-items: center;
+  min-width: 230px;
+  height: 30px;
+  padding: 0 10px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
 .cd-device-trigger {
   display: flex;
   align-items: center;

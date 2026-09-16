@@ -1,14 +1,24 @@
 import { PageHeader } from "../../components/layout";
-import { MetricCard, StatusIndicator } from "../../components/ui";
+import { LoadingState, MetricCard, StatusIndicator } from "../../components/ui";
 import { useDeviceContext } from "../../stores/DeviceContext";
 
 /**
- * Minimal Phase-2 placeholder for the real Dashboard (built out fully
- * in Phase 4 §7). Shows just enough — bound to the selected device —
- * to prove the shell's device context actually flows into pages.
+ * Minimal Phase-2/3 placeholder for the real Dashboard (built out
+ * fully in Phase 4 §7). Shows just enough — bound to the selected
+ * device — to prove the shell's device context actually flows into
+ * pages through the mock service layer (§22).
  */
 export function DashboardPage() {
-  const { selectedDevice } = useDeviceContext();
+  const { selectedDevice, loading } = useDeviceContext();
+
+  if (loading || !selectedDevice) {
+    return (
+      <>
+        <PageHeader title="Dashboard" />
+        <LoadingState label="Loading device…" />
+      </>
+    );
+  }
 
   return (
     <>

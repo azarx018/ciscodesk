@@ -1,59 +1,103 @@
 import { Device } from "../types/device";
 
 /**
- * Placeholder mock devices for the Phase 2 shell (device switcher,
- * command palette "switch device" entries). Phase 3 replaces this
- * with a full mock device dataset served through deviceService.
+ * The five mock devices used across every page (§5, §23). Other data
+ * files (interfaces, vlans, routes, …) are keyed by these same ids and
+ * must stay internally consistent with what's declared here — e.g.
+ * `interfaceCount` matches the number of rows in data/interfaces.ts
+ * for that device.
  */
 export const DEVICES: Device[] = [
   {
     id: "core-rtr-01",
+    name: "CORE-RTR-01",
     hostname: "CORE-RTR-01",
     managementIp: "10.0.0.1",
     platform: "Cisco IOS XE",
     osVersion: "17.09.04a",
     status: "online",
     uptime: "17d 04h 12m",
+    cpu: 23,
+    memory: 41,
+    temperature: 46,
     lastSeen: "just now",
+    group: "Core",
+    interfaceCount: 24,
+    model: "Cisco ASR1001-X",
+    serial: "FXS2340Q1A2",
   },
   {
     id: "core-sw-01",
+    name: "CORE-SW-01",
     hostname: "CORE-SW-01",
     managementIp: "10.0.0.2",
     platform: "Cisco IOS XE",
     osVersion: "17.06.05",
     status: "online",
     uptime: "44d 11h 02m",
+    cpu: 31,
+    memory: 52,
+    temperature: 41,
     lastSeen: "just now",
+    group: "Core",
+    interfaceCount: 48,
+    model: "Cisco Catalyst 9300-48P",
+    serial: "FCW2213L0K4",
   },
   {
     id: "access-sw-01",
+    name: "ACCESS-SW-01",
     hostname: "ACCESS-SW-01",
     managementIp: "10.0.1.10",
     platform: "Cisco IOS",
     osVersion: "15.2(7)E9",
     status: "warning",
     uptime: "3d 02h 40m",
+    cpu: 68,
+    memory: 74,
+    temperature: 52,
     lastSeen: "1m ago",
+    group: "Access",
+    interfaceCount: 24,
+    model: "Cisco Catalyst 2960X-24TS-L",
+    serial: "FOC1912X2QJ",
   },
   {
     id: "edge-rtr-01",
+    name: "EDGE-RTR-01",
     hostname: "EDGE-RTR-01",
     managementIp: "203.0.113.1",
     platform: "Cisco IOS XE",
     osVersion: "17.09.02",
     status: "error",
     uptime: "0d 00h 12m",
+    cpu: 12,
+    memory: 38,
+    temperature: 39,
     lastSeen: "6m ago",
+    group: "Distribution",
+    interfaceCount: 8,
+    model: "Cisco ISR4331",
+    serial: "FDO2147Z0AB",
   },
   {
     id: "branch-sw-01",
+    name: "BRANCH-SW-01",
     hostname: "BRANCH-SW-01",
     managementIp: "10.0.4.5",
     platform: "Cisco IOS",
     osVersion: "15.2(7)E7",
     status: "offline",
     uptime: "—",
+    cpu: 0,
+    memory: 0,
+    temperature: 0,
     lastSeen: "2h ago",
+    group: "Branches",
+    interfaceCount: 12,
+    model: "Cisco Catalyst 2960L-12PS-LL",
+    serial: "FCZ2105R1TL",
   },
 ];
+
+export const DEVICE_GROUPS_MOCK = ["Core", "Distribution", "Access", "Branches", "Labs"] as const;
