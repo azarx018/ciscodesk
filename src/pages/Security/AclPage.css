@@ -1,0 +1,10 @@
+.cd-acl-groups { display: flex; flex-direction: column; gap: var(--space-4); }
+.cd-config-preview {
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  white-space: pre-wrap;
+}

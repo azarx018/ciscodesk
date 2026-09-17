@@ -1,0 +1,15 @@
+.cd-topo-canvas-wrap {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  padding: 12px;
+}
+.cd-topo-node-box { cursor: pointer; }
+.cd-topo-node-label { font: 600 11px var(--font-mono); fill: var(--text-primary); }
+.cd-topo-node-sub { font: 10px var(--font-mono); fill: var(--text-muted); }
+.cd-topo-link-label { font: 10px var(--font-mono); fill: var(--text-muted); }
+.cd-topo-detail {
+  margin-top: var(--space-4);
+  max-width: 360px;
+}

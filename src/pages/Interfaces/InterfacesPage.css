@@ -1,0 +1,2 @@
+.cd-if-name-link { background: none; border: none; padding: 0; color: var(--accent); font-family: var(--font-mono); font-size: var(--text-sm); cursor: pointer; }
+.cd-if-name-link:hover { text-decoration: underline; }

@@ -113,3 +113,45 @@ a {
 
 .scroll-y { overflow-y: auto; }
 .scroll-x { overflow-x: auto; }
+
+/* ============================================================
+   SHARED PAGE PATTERNS
+   Panels, stat rows, toolbars and activity/alert lists are reused
+   across nearly every Phase 4 page (Dashboard, Devices, Switching,
+   Routing, …) — defined once here rather than per-page.
+   ============================================================ */
+.cd-panel { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: var(--space-4); }
+.cd-panel-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid var(--border); gap: var(--space-2); }
+.cd-panel-title { font-size: var(--text-sm); font-weight: 600; }
+.cd-panel-body { padding: 14px; }
+
+.cd-stat-row { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.cd-stat { display: flex; flex-direction: column; gap: 2px; }
+.cd-stat-value { font-size: 19px; font-weight: 600; font-family: var(--font-mono); }
+.cd-stat-label { font-size: var(--text-xs); color: var(--text-muted); }
+
+.cd-activity-list, .cd-alert-list { display: flex; flex-direction: column; }
+.cd-activity-row, .cd-alert-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-sm);
+}
+.cd-activity-row:last-child, .cd-alert-row:last-child { border-bottom: none; }
+.cd-activity-time, .cd-alert-time { color: var(--text-muted); font-size: var(--text-xs); flex: none; width: 78px; }
+
+.cd-toolbar { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: wrap; }
+.cd-toolbar-search { flex: 1; min-width: 200px; max-width: 320px; }
+.cd-bulk-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 7px 12px;
+  background: var(--accent-wash);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
+}

@@ -1,8 +1,8 @@
-.cd-device-selector { position: relative; }
+.cd-device-selector { position: relative; min-width: 0; }
 .cd-device-selector-loading {
   display: flex;
   align-items: center;
-  min-width: 230px;
+  min-width: 0;
   height: 30px;
   padding: 0 10px;
   font-size: var(--text-sm);
@@ -16,18 +16,25 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
-  min-width: 230px;
+  min-width: 0;
+  max-width: 230px;
 }
 .cd-device-trigger:hover { border-color: var(--border-strong); }
-.cd-device-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; flex: 1; text-align: left; }
+.cd-device-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; flex: 1; text-align: left; overflow: hidden; }
 .cd-device-name { font-weight: 600; font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cd-device-meta { font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 640px) {
+  .cd-device-trigger { max-width: 140px; padding: 5px 6px; }
+  .cd-device-meta { display: none; }
+}
 
 .cd-device-menu {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
   width: 340px;
+  max-width: calc(100vw - 24px);
   max-height: 360px;
   overflow-y: auto;
   background: var(--surface-raised);
