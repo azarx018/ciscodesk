@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import "./DataTable.css";
 import { LoadingState } from "../LoadingState";
 import { EmptyState } from "../EmptyState";
@@ -26,6 +26,22 @@ export interface DataTableProps<T> {
 }
 
 type SortDir = "asc" | "desc" | null;
+
+function SelectAllCheckbox({ total, selectedCount, onToggle }: { total: number; selectedCount: number; onToggle: () => void }) {
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (ref.current) ref.current.indeterminate = selectedCount > 0 && selectedCount < total;
+  }, [selectedCount, total]);
+  return (
+    <input
+      ref={ref}
+      type="checkbox"
+      checked={total > 0 && selectedCount === total}
+      onChange={onToggle}
+      aria-label="Select all rows"
+    />
+  );
+}
 
 /**
  * Generic, dense data table shared across every list view (Devices,
@@ -96,23 +112,33 @@ export function DataTable<T>({
           <tr>
             {selectable && (
               <th className="cd-table-checkcol">
-                <input
-                  type="checkbox"
-                  checked={rows.length > 0 && selectedIds.length === rows.length}
-                  onChange={toggleAll}
-                  aria-label="Select all rows"
-                />
+                <SelectAllCheckbox total={rows.length} selectedCount={selectedIds.length} onToggle={toggleAll} />
               </th>
             )}
             {columns.map((col) => (
               <th
                 key={col.key}
                 style={{ width: col.width, textAlign: col.align }}
-                className={col.sortValue ? "cd-table-sortable" : undefined}
-                onClick={() => toggleSort(col)}
+                aria-sort={
+                  col.sortValue
+                    ? sortKey === col.key
+                      ? sortDir === "asc"
+                        ? "ascending"
+                        : sortDir === "desc"
+                        ? "descending"
+                        : "none"
+                      : "none"
+                    : undefined
+                }
               >
-                {col.header}
-                {sortKey === col.key && (sortDir === "asc" ? " ▲" : sortDir === "desc" ? " ▼" : "")}
+                {col.sortValue ? (
+                  <button type="button" className="cd-table-sort-btn" onClick={() => toggleSort(col)}>
+                    {col.header}
+                    {sortKey === col.key && (sortDir === "asc" ? " ▲" : sortDir === "desc" ? " ▼" : "")}
+                  </button>
+                ) : (
+                  col.header
+                )}
               </th>
             ))}
           </tr>

@@ -21,6 +21,7 @@
 .cd-input:focus { border-color: var(--accent); outline: none; }
 .cd-input-error { border-color: var(--status-error); }
 .cd-input::placeholder { color: var(--text-muted); }
+.cd-input:disabled { opacity: 0.6; cursor: not-allowed; background: var(--surface-inset); }
 
 .cd-input-wrap { position: relative; }
 .cd-input-wrap .cd-input { padding-left: 30px; }

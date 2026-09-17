@@ -16,7 +16,7 @@
 }
 .cd-btn:hover { background: var(--surface-hover); }
 .cd-btn:active { transform: translateY(0.5px); }
-.cd-btn:disabled { opacity: 0.45; pointer-events: none; }
+.cd-btn:disabled { opacity: 0.45; pointer-events: none; cursor: not-allowed; }
 
 .cd-btn-primary {
   background: var(--accent);

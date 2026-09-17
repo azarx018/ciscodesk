@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { NAV } from "../../../app/navigation";
 import { Icon } from "../../icons/Icon";
@@ -10,7 +10,7 @@ export interface SidebarProps {
 }
 
 function groupContainsPath(groupChildren: { path: string }[] | undefined, pathname: string): boolean {
-  return !!groupChildren?.some((c) => c.path === pathname);
+  return !!groupChildren?.some((c) => c.path === pathname || pathname.startsWith(`${c.path}/`));
 }
 
 export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
@@ -22,6 +22,18 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
     });
     return initial;
   });
+
+  // The sidebar persists across route changes (it lives in RootLayout,
+  // not per-page), so its initial open/closed state only reflects the
+  // URL at first mount. Re-derive whenever the route changes — e.g.
+  // navigating via the command palette or a breadcrumb — so the
+  // section containing the active page is always visibly expanded.
+  useEffect(() => {
+    const owningGroup = NAV.find((g) => groupContainsPath(g.children, location.pathname));
+    if (owningGroup) {
+      setOpenGroups((prev) => (prev[owningGroup.id] ? prev : { ...prev, [owningGroup.id]: true }));
+    }
+  }, [location.pathname]);
 
   function toggleGroup(id: string) {
     setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }));

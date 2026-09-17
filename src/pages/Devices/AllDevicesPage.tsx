@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./AllDevicesPage.css";
 import { PageHeader } from "../../components/layout";
 import { Badge, Button, ConfirmDialog, DataTable, Input, StatusIndicator, useToast } from "../../components/ui";
 import { Icon } from "../../components/icons/Icon";

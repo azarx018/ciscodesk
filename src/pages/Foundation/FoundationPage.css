@@ -8,14 +8,3 @@
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--space-4);
 }
-
-.cd-panel { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); }
-.cd-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 11px 14px;
-  border-bottom: 1px solid var(--border);
-}
-.cd-panel-title { font-size: var(--text-sm); font-weight: 600; }
-.cd-panel-body { padding: 14px; }

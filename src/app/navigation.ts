@@ -120,7 +120,12 @@ export const FLAT_NAV: FlatNavEntry[] = (() => {
 })();
 
 export function findNavEntry(path: string): FlatNavEntry | undefined {
-  return FLAT_NAV.find((e) => e.path === path);
+  const exact = FLAT_NAV.find((e) => e.path === path);
+  if (exact) return exact;
+  // Fall back to the longest static entry that's a parent of this path,
+  // so dynamic child routes (e.g. /interfaces/:interfaceId) still
+  // resolve to a real breadcrumb instead of "Not found".
+  return FLAT_NAV.filter((e) => path.startsWith(`${e.path}/`)).sort((a, b) => b.path.length - a.path.length)[0];
 }
 
 export function crumbsForPath(path: string): { label: string }[] {

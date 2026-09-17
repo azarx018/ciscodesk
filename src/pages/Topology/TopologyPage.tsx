@@ -5,6 +5,7 @@ import { PageHeader } from "../../components/layout";
 import { Badge, Button, LoadingState, StatusIndicator } from "../../components/ui";
 import { useAsync } from "../../hooks/useAsync";
 import { topologyService } from "../../services/mock/topologyService";
+import { useDeviceContext } from "../../stores/DeviceContext";
 import { TopologyNode } from "../../types/topology";
 
 const STATUS_COLOR: Record<TopologyNode["status"], string> = {
@@ -18,6 +19,7 @@ const STATUS_COLOR: Record<TopologyNode["status"], string> = {
 export function TopologyPage() {
   const { data, loading } = useAsync(() => topologyService.get(), []);
   const [selected, setSelected] = useState<TopologyNode | null>(null);
+  const { selectDevice } = useDeviceContext();
   const navigate = useNavigate();
 
   if (loading || !data) {
@@ -80,7 +82,14 @@ export function TopologyPage() {
           <div className="cd-panel-body flex-col gap-2">
             <div className="text-sm"><span className="text-muted">Type</span> — {selected.type}</div>
             <div className="text-sm"><span className="text-muted">Management IP</span> — <span className="mono">{selected.managementIp}</span></div>
-            <Button size="sm" variant="primary" onClick={() => navigate("/system/device-info")}>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => {
+                selectDevice(selected.deviceId);
+                navigate("/system/device-info");
+              }}
+            >
               View device information
             </Button>
           </div>

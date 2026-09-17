@@ -19,6 +19,17 @@ table.cd-table thead th {
 }
 .cd-table-sortable { cursor: pointer; user-select: none; }
 .cd-table-sortable:hover { color: var(--text-primary); }
+.cd-table-sort-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: -2px 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+.cd-table-sort-btn:hover { color: var(--text-primary); }
 table.cd-table tbody td {
   padding: 8px 12px;
   border-bottom: 1px solid var(--border);

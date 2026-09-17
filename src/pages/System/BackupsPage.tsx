@@ -16,6 +16,8 @@ export function BackupsPage() {
   const toast = useToast();
   const [creating, setCreating] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<Backup | null>(null);
+  const [pendingRestore, setPendingRestore] = useState<Backup | null>(null);
+  const [restoring, setRestoring] = useState(false);
 
   async function handleCreate() {
     if (!deviceId) return;
@@ -35,6 +37,19 @@ export function BackupsPage() {
     toast.show("Backup deleted (simulated).", "success");
     setPendingDelete(null);
     refetch();
+  }
+
+  async function handleRestore() {
+    if (!pendingRestore) return;
+    setRestoring(true);
+    try {
+      // Simulated — no real device configuration is touched.
+      await new Promise((r) => setTimeout(r, 500));
+      toast.show(`Restored from ${pendingRestore.label} (simulated).`, "success");
+      setPendingRestore(null);
+    } finally {
+      setRestoring(false);
+    }
   }
 
   return (
@@ -61,7 +76,7 @@ export function BackupsPage() {
             align: "right",
             render: (b) => (
               <div className="flex gap-2" style={{ justifyContent: "flex-end" }}>
-                <Button size="sm" variant="ghost" onClick={() => toast.show(`Restoring from ${b.label} (simulated).`, "info")}>Restore</Button>
+                <Button size="sm" variant="ghost" onClick={() => setPendingRestore(b)}>Restore</Button>
                 <Button size="sm" variant="ghost" onClick={() => toast.show(`Downloading ${b.label} (simulated).`, "info")}>Download</Button>
                 <Button size="sm" variant="ghost" onClick={() => setPendingDelete(b)}>Delete</Button>
               </div>
@@ -83,6 +98,15 @@ export function BackupsPage() {
         destructive
         onConfirm={handleDelete}
         onCancel={() => setPendingDelete(null)}
+      />
+
+      <ConfirmDialog
+        open={!!pendingRestore}
+        title="Restore backup"
+        message={`This will overwrite the running configuration on ${selectedDevice?.hostname} with "${pendingRestore?.label}". This is simulated — no real device is changed.`}
+        confirmLabel={restoring ? "Restoring…" : "Restore"}
+        onConfirm={handleRestore}
+        onCancel={() => setPendingRestore(null)}
       />
     </>
   );

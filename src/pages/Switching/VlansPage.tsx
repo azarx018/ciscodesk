@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PageHeader } from "../../components/layout";
-import { Badge, Button, DataTable, Input, Modal, useToast } from "../../components/ui";
+import { Badge, Button, ConfirmDialog, DataTable, Input, Modal, useToast } from "../../components/ui";
 import { useDeviceContext } from "../../stores/DeviceContext";
 import { useAsync } from "../../hooks/useAsync";
 import { switchingService } from "../../services/mock/switchingService";
@@ -16,6 +16,7 @@ export function VlansPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState({ vlanId: "", name: "" });
   const [saving, setSaving] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<Vlan | null>(null);
 
   async function handleCreate() {
     if (!deviceId || !form.vlanId || !form.name) return;
@@ -31,9 +32,11 @@ export function VlansPage() {
     }
   }
 
-  async function handleDelete(vlan: Vlan) {
-    await switchingService.deleteVlan(vlan.id);
-    toast.show(`VLAN ${vlan.vlanId} deleted (simulated).`, "success");
+  async function handleDelete() {
+    if (!pendingDelete) return;
+    await switchingService.deleteVlan(pendingDelete.id);
+    toast.show(`VLAN ${pendingDelete.vlanId} deleted (simulated).`, "success");
+    setPendingDelete(null);
     refetch();
   }
 
@@ -61,7 +64,7 @@ export function VlansPage() {
             header: "",
             align: "right",
             render: (v) => (
-              <Button size="sm" variant="ghost" onClick={() => handleDelete(v)}>
+              <Button size="sm" variant="ghost" onClick={() => setPendingDelete(v)}>
                 Delete
               </Button>
             ),
@@ -92,6 +95,16 @@ export function VlansPage() {
           <Input label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="LAB" />
         </div>
       </Modal>
+
+      <ConfirmDialog
+        open={!!pendingDelete}
+        title="Delete VLAN"
+        message={`This will delete VLAN ${pendingDelete?.vlanId} (${pendingDelete?.name}) from ${selectedDevice?.hostname}. This action cannot be undone.`}
+        confirmLabel="Delete"
+        destructive
+        onConfirm={handleDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </>
   );
 }

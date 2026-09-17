@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import "./AclPage.css";
 import { PageHeader } from "../../components/layout";
-import { Badge, Button, Checkbox, DataTable, Input, LoadingState, Modal, Select, useToast } from "../../components/ui";
+import { Badge, Button, Checkbox, ConfirmDialog, DataTable, Input, LoadingState, Modal, Select, useToast } from "../../components/ui";
 import { useDeviceContext } from "../../stores/DeviceContext";
 import { useAsync } from "../../hooks/useAsync";
 import { securityService } from "../../services/mock/securityService";
@@ -28,6 +28,7 @@ export function AclPage() {
   const [activeAcl, setActiveAcl] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [previewByAcl, setPreviewByAcl] = useState<Record<string, string>>({});
+  const [pendingDelete, setPendingDelete] = useState<AclRule | null>(null);
 
   const grouped = useMemo(() => {
     const map = new Map<string, AclRule[]>();
@@ -57,9 +58,11 @@ export function AclPage() {
     refetch();
   }
 
-  async function handleDelete(rule: AclRule) {
-    await securityService.removeAclRule(rule.id);
+  async function handleDelete() {
+    if (!pendingDelete) return;
+    await securityService.removeAclRule(pendingDelete.id);
     toast.show("Rule removed (simulated).", "success");
+    setPendingDelete(null);
     refetch();
   }
 
@@ -98,7 +101,7 @@ export function AclPage() {
                     { key: "source", header: "Source", render: (r) => <span className="mono">{r.source}</span> },
                     { key: "destination", header: "Destination", render: (r) => <span className="mono">{r.destination}{r.destinationPort ? `:${r.destinationPort}` : ""}</span> },
                     { key: "logging", header: "Logging", render: (r) => (r.logging ? <Badge tone="outline">log</Badge> : <span className="text-muted">—</span>) },
-                    { key: "actions", header: "", align: "right", render: (r) => <Button size="sm" variant="ghost" onClick={() => handleDelete(r)}>Delete</Button> },
+                    { key: "actions", header: "", align: "right", render: (r) => <Button size="sm" variant="ghost" onClick={() => setPendingDelete(r)}>Delete</Button> },
                   ]}
                   rows={aclRules}
                   getRowId={(r) => r.id}
@@ -131,6 +134,16 @@ export function AclPage() {
           <Checkbox label="Enable logging" checked={form.logging} onChange={(e) => setForm({ ...form, logging: e.target.checked })} />
         </div>
       </Modal>
+
+      <ConfirmDialog
+        open={!!pendingDelete}
+        title="Delete ACL rule"
+        message={`This will remove sequence ${pendingDelete?.sequence} from ${pendingDelete?.aclName} on ${selectedDevice?.hostname}. This action cannot be undone.`}
+        confirmLabel="Delete"
+        destructive
+        onConfirm={handleDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </>
   );
 }
